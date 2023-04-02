@@ -1,0 +1,55 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "develop" branch
+  push:
+    branches: [ master ]
+
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+
+      - name: cache m2 repositories
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.m2/repository
+          key: ${{runner.os}}-maven-${{env.cache-name}}-${{hasFiles('**/pom.xml')}}
+          restore-keys:
+            ${{runner.os}}-maven-${{env.cache-name}}
+            ${{runner.os}}-maven
+            ${{runner.os}}-
+            
+
+      # Maven settings.xml
+      - name: Create settings.xmlwhelk-io/maven
+    
+        uses: whelk-io/maven-settings-xml-action@v20
+        with: 
+          servers: '[{ "id": "anypoint-exchange", "username": "${{secrets.ANYPOINT_USERNAME}}", "password": "${{secrets.ANYPOINT_PASSWORD}}" }]'
+          repositories: '[{ "id": "some-repository", "url": "http://some.repository.url" }]'
+          run:       
+            cat ~/.m2/repository
+      - name: Set JDK 1.8
+        uses: actions/setup-java@v3
+        with: 
+          java-version: 1.8
+          path: ~/.m2/repository
+          settings-path: ${{github.workspace}}
+          
+      - name: CloudHub Deployment
+        run: mvn clean package deploy -DskipTests -DmuleDeploy -Dusername=${{secrets.ANYPOINT_USERNAME}} -Dpassword=${{secrets.ANYPOINT_PASSWORD}}
+      
+                  
