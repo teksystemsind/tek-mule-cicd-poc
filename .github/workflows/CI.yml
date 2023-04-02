@@ -52,6 +52,6 @@ jobs:
           settings-path: ${{github.workspace}}
           
       - name: CloudHub Deployment
-        run: mvn clean package deploy -DskipTests -DmuleDeploy -Dusername=${{secrets.ANYPOINT_USERNAME}} -Dpassword=${{secrets.ANYPOINT_PASSWORD}}
+        run: mvn clean deploy -DskipTests -DmuleDeploy -Dusername=${{secrets.ANYPOINT_USERNAME}} -Dpassword=${{secrets.ANYPOINT_PASSWORD}}
       
                   
