@@ -10,7 +10,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	</http:listener-config>
 	<flow name="codetestFlow" doc:id="34ccc368-b97e-4683-b5f7-b05bae887a11" >
 		<http:listener doc:name="Listener" doc:id="73c3b88c-69a6-4f2d-8868-28b4fb9486b3" config-ref="HTTP_Listener_config" path="/codetest"/>
-		<ee:transform doc:name="Transform Message" doc:id="d1caefac-1a1e-4aee-b503-ef9b2f14e491" >
+		<ee:transform doc:name="Final Message" doc:id="d1caefac-1a1e-4aee-b503-ef9b2f14e491" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json

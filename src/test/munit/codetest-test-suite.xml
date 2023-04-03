@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="codetest-test-suite.xml" />
+	<munit:test name="codetest-test-suite-codetestFlowTest" doc:id="cee4f1a5-815d-4d6e-81b2-dc0f49450353" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to codetestFlow" doc:id="35b45c64-573c-4903-ad62-d957f1c68884" name="codetestFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="f152f7b6-0ecc-4b53-a48c-20f108f9c28b" actual="#[payload]" expected="#[{&quot;Message&quot;: &quot;You're talking to Cloudhub!&quot;}]" message='"Passed"'/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
