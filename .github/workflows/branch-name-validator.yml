@@ -1,0 +1,13 @@
+name: branch name validator
+on: pull_request
+jobs:
+    branch-naming-rules: 
+      runs-on: ubuntu-latest 
+      steps: 
+      - uses: deepakputhraya/action-branch-name@v1.0.0 
+        with: 
+            regex: '([a-z])+\-([a-z])+' 
+            allowed_prefixes: 'feat,feature,fix,bugfix,hotfix,release,dependabot,automation' 
+            ignore: master,develop 
+            min_length: 5 # (255 - 'refs/heads/') 
+            max_length: 244
