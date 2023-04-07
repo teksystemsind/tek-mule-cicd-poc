@@ -140,7 +140,11 @@
 		</dependency>
 					  
 	</dependencies>
-
+	<scm>
+		<connection>scm:git:github.com:teksystemsind/tek-mule-cicd-poc.git</connection>
+		<developerConnection>scm:git:github.com:teksystemsind/tek-mule-cicd-poc.git</developerConnection>
+		<tag>tek-mule-cicd-poc-1.0.0</tag>
+	</scm>
 	<repositories>
 		<repository>
 			<id>anypoint-exchange-v3</id>
